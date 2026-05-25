@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Projekt.iml" filepath="$PROJECT_DIR$/Projekt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dashboard/dashboard.iml" filepath="$PROJECT_DIR$/dashboard/dashboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dummy_backend/dummy_backend.iml" filepath="$PROJECT_DIR$/dummy_backend/dummy_backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dummy_db.iml" filepath="$PROJECT_DIR$/dummy_db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dummy_frontend/dummy_frontend.iml" filepath="$PROJECT_DIR$/dummy_frontend/dummy_frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/management_ui/management_ui.iml" filepath="$PROJECT_DIR$/management_ui/management_ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/orchestrator.iml" filepath="$PROJECT_DIR$/orchestrator.iml" />
+    </modules>
+  </component>
+</project>
