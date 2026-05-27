@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package dummydb;
+
+option go_package = "dummy_db/pb;pb";
+
+service KeyValueStore {
+  rpc Get(GetRequest) returns (GetResponse);
+  rpc Set(SetRequest) returns (SetResponse);
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+  rpc List(ListRequest) returns (ListResponse);
+}
+
+message GetRequest {
+  string key = 1;
+}
+
+message GetResponse {
+  bool found = 1;
+  string value = 2;
+  string error = 3;
+}
+
+message SetRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message SetResponse {
+  bool ok = 1;
+  string error = 2;
+}
+
+message DeleteRequest {
+  string key = 1;
+}
+
+message DeleteResponse {
+  bool ok = 1;
+  string error = 2;
+}
+
+message ListRequest {}
+
+message KeyValue {
+  string key = 1;
+  string value = 2;
+}
+
+message ListResponse {
+  repeated KeyValue items = 1;
+  string error = 2;
+}
