@@ -3,7 +3,9 @@
   <component name="Go" enabled="true" />
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/dummy_db" />
+    <content url="file://$MODULE_DIR$/dummy_db">
+      <excludeFolder url="file://$MODULE_DIR$/dummy_db/data" />
+    </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
