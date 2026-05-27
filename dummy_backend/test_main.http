@@ -1,11 +1,32 @@
-# Test your FastAPI endpoints
-
-GET http://127.0.0.1:8000/
-Accept: application/json
+GET http://localhost:50052/health
 
 ###
 
-GET http://127.0.0.1:8000/hello/User
-Accept: application/json
+GET http://localhost:50052/items
 
 ###
+
+POST http://localhost:50052/items
+Content-Type: application/json
+
+{
+  "key": "foo",
+  "value": "bar"
+}
+
+###
+
+GET http://localhost:50052/items/foo
+
+###
+
+PUT http://localhost:50052/items/foo
+Content-Type: application/json
+
+{
+  "value": "baz"
+}
+
+###
+
+DELETE http://localhost:50052/items/foo
