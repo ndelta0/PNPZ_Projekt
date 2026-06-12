@@ -2,22 +2,21 @@ FROM golang:1.26-alpine AS builder
 
 WORKDIR /app
 
-COPY go.mod ./
-# No go.sum found
-
+COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
 
-RUN go build -o orchestrator main.go
+RUN go mod tidy
 
-FROM alpine:latest
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags "-s -w" -o orchestrator main.go
 
-# Install docker CLI if needed (optional, since it will use socket)
-RUN apk add --no-cache docker-cli
+FROM scratch
 
-WORKDIR /root/
+WORKDIR /
 
-COPY --from=builder /app/orchestrator .
+COPY --from=builder /app/orchestrator /orchestrator
 
-CMD ["./orchestrator"]
+EXPOSE 8080/tcp 50052/tcp
+
+ENTRYPOINT ["/orchestrator"]

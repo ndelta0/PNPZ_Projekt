@@ -2,15 +2,49 @@ services:
   orchestrator:
     build:
       context: ./orchestrator
+    ports:
+      - "8080:8080"
+      - "50052:50052"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
+      - ORCH_DB_IMAGE=dummy_db:latest
+      - ORCH_BACKEND_IMAGE=dummy_backend:latest
+      - ORCH_FRONTEND_IMAGE=dummy_frontend:latest
+      - ORCH_DB_DATA_PATH=${ORCH_DB_DATA_PATH:-/tmp/dummy_stack/db.json}
+      - ORCH_BACKEND_CPUS=${ORCH_BACKEND_CPUS:-0}
+      - ORCH_BACKEND_MIN=${ORCH_BACKEND_MIN:-1}
+      - ORCH_BACKEND_MAX=${ORCH_BACKEND_MAX:-3}
+      - ORCH_FRONTEND_HOST_PORT=${ORCH_FRONTEND_HOST_PORT:-3001}
 
   dashboard:
     build:
       context: ./dashboard
     ports:
       - "3000:3000"
+    environment:
+      - ORCHESTRATOR_URL=http://orchestrator:8080
     depends_on:
       - orchestrator
+
+  dummy_db_image:
+    image: dummy_db:latest
+    build:
+      context: ./dummy_db
+    profiles:
+      - managed-images
+
+  dummy_backend_image:
+    image: dummy_backend:latest
+    build:
+      context: ./dummy_backend
+    profiles:
+      - managed-images
+
+  dummy_frontend_image:
+    image: dummy_frontend:latest
+    build:
+      context: ./dummy_frontend
+    profiles:
+      - managed-images

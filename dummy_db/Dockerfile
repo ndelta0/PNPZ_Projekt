@@ -16,14 +16,14 @@ RUN PATH="/go/bin:${PATH}" \
 
 RUN go mod tidy
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /out/dummy_db .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags "-s -w" -o /out/dummy_db .
 
-FROM alpine:latest
+FROM scratch
 
-WORKDIR /root/
+WORKDIR /
 
 COPY --from=builder /out/dummy_db /dummy_db
 
 EXPOSE 50051/tcp
 
-CMD ["/dummy_db"]
+ENTRYPOINT ["/dummy_db"]

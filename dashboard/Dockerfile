@@ -5,13 +5,13 @@ RUN npm install -g pnpm
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN CI=true pnpm install --frozen-lockfile
 
 COPY . .
-RUN pnpm build
+RUN CI=true pnpm build
 
 # Only keep production dependencies
-RUN pnpm prune --prod
+RUN CI=true pnpm prune --prod
 
 FROM node:22-alpine
 
